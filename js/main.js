@@ -1,3 +1,8 @@
+// Devin "Lauren" Elder
+// VFW Term 1212
+// Project 3
+// 11/29/2012
+
 window.addEventListener("DOMContentLoaded", function() {
 
 // Shortcut Function
