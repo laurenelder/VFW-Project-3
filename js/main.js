@@ -109,6 +109,7 @@ window.addEventListener("DOMContentLoaded", function() {
 		$("item").style.display = "block";
 		for (var i = 0, j = window.localStorage.length; i < j; i++) {
 			var makeLi = document.createElement("li");
+			var linksLi = document.createElement("li");
 			makeList.appendChild(makeLi);
 			var key = window.localStorage.key(i);
 			var value = window.localStorage.getItem(key);
@@ -120,8 +121,36 @@ window.addEventListener("DOMContentLoaded", function() {
 				makeSubList.appendChild(makeSubLi);
 				var optSubText = obj[n][0] + " " + obj[n][1];
 				makeSubLi.innerHTML = optSubText;
+				makeSubList.appendChild(linksLi)
 			};
+		makeItemLinks(window.localStorage.key(i), linksLi);
 		};
+	};
+
+// Make Links Function
+	var makeItemLinks = function(key, linksLi) {
+
+		// Edit Link
+		var editLink = document.createElement("a");
+		editLink.href = "#";
+		editLink.key = key;
+		var editText = "Edit User"
+		//editLink.addEventListener("click", editItem);
+		editLink.innerHTML = editText;
+		linksLi.appendChild(editLink);
+
+		// Break Tag
+		var breakTag = document.createElement("br");
+		linksLi.appendChild(breakTag);
+
+		// Delete Link
+		var deleteLink = document.createElement("a");
+		deleteLink.href = "#";
+		deleteLink.key = key;
+		var deleteText = "Delete User"
+		//deleteLink.addEventListener("click", editItem);
+		deleteLink.innerHTML = deleteText;
+		linksLi.appendChild(deleteLink);
 	};
 
 // Store Data Function
