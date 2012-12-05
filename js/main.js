@@ -81,12 +81,14 @@ window.addEventListener("DOMContentLoaded", function() {
 	var toggleLinks = function(n) {
 		switch(n) {
 			case "on":
+				$("errors").style.display = "none";
 				$("addUserForm").style.display = "none";
 				$("clear").style.display = "inline";
 				$("display").style.display = "none";
 				$("Add_a_User").style.display = "inline";
 				break;
 			case "off":
+				$("errors").style.display = "block";
 				$("addUserForm").style.display = "inline";
 				$("clear").style.display = "inline";
 				$("display").style.display = "inline";
@@ -154,8 +156,12 @@ window.addEventListener("DOMContentLoaded", function() {
 	};
 
 // Store Data Function
-	var	storeData = function() {
-		var id					= Math.floor(Math.random() * 1000001);
+	var	storeData = function(key) {
+		if (!key) {
+			var id				= Math.floor(Math.random() * 1000001);
+		} else {
+			id = key;
+		}
 		getRadioGender();
 		getRadioOrientation();
 		getCheckBoxValue();
@@ -199,9 +205,9 @@ window.addEventListener("DOMContentLoaded", function() {
 		$("fcontact").value = item.contacted[1];
 		var radioOne = document.forms[0].gender;
 		for (var i = 0; i < radioOne.length; i++) {
-			if (radioOne[i].value == "Male" && item.gender[1] == "Male") {
+			if (radioOne[i].value == "Male" && obj.gender[1] == "Male") {
 				radioOne[i].setAttribute("checked", "checked");
-			} else if (radioOne[i].value == "Female" && item.gender[1] == "Female") {
+			} else if (radioOne[i].value == "Female" && obj.gender[1] == "Female") {
 				radioOne[i].setAttribute("checked", "checked");
 			};
 		};
@@ -245,9 +251,85 @@ window.addEventListener("DOMContentLoaded", function() {
 		$("comments").value = item.notes[1];
 		save.removeEventListener("click", validate);
 		$("submit").value = "Edit User";
-		var editSubmit $("submit");
+		var editSubmit = $("submit");
+		editSubmit.value = "Edit User";
 		editSubmit.addEventListener("click", validate);
 		editSubmit.key = this.key;
+	};
+
+// Validate Function
+	var validate = function(e) {
+		var getUname = $("uname");
+		var getAge = $("age");
+		var getCity = $("city");
+		var getWsite = $("wsite");
+		var getFcontact = $("fcontact");
+		var getMusic = $("music");
+		var getMovie = $("movie");
+		var getCompatibility = $("compatibility");
+		var getComments = $("comments");
+
+		// Reset Messages
+		errMsg.innerHTML = "";
+		getUname.style.border = "1px solid black";
+		getAge.style.border = "1px solid black";
+		getCity.style.border = "1px solid black";
+		getWsite.style.border = "1px solid black";
+		getFcontact.style.border = "1px solid black";
+
+		
+		var msgArry = [];
+
+		// Username Verification
+		if ($("uname").value === "") {
+			var unameError = "Please enter a username.";
+			getUname.style.border = "1px solid red";
+			msgArry.push(unameError);
+		};
+
+		// Age Verification
+		if ($("age").value === "") {
+			var ageError = "Please enter a age for the user.";
+			getAge.style.border = "1px solid red";
+			msgArry.push(ageError);
+		};
+		
+		// City Verification
+		if ($("city").value === "") {
+			var cityError = "Please enter a city for the user.";
+			getCity.style.border = "1px solid red";
+			msgArry.push(cityError);
+		};
+
+		// Website Verification
+		var re = /^\w+(\.\w{2,3})+$/;
+		if (!(re.exec(getWsite.value))) {
+			var wsiteError = "Please enter a website the user is located on.";
+			getWsite.style.border = "1px solid red";
+			msgArry.push(wsiteError);
+		};
+
+		// Date Verification
+		var re = /^(\w{2})+(\/\w{2})+(\/\w{2})+$/;
+		if (!(re.exec(getFcontact.value))) {
+			var dateError = "Please enter a date in the following format (01/01/12).";
+			getFcontact.style.border = "1px solid red";
+			msgArry.push(dateError);
+		};
+
+		// Display Error Messages
+		if (msgArry.length >= 1) {
+			for (var i = 0, j = msgArry.length; i < j; i++) {
+				var errTxt = document.createElement("li");
+				errTxt.innerHTML = msgArry[i];
+				errMsg.appendChild(errTxt);
+			};
+		
+		} else {
+			storeData(this.key);
+		};
+		e.preventDefault();
+		return false;
 	};
 
 // Clear Data Function
@@ -272,11 +354,14 @@ window.addEventListener("DOMContentLoaded", function() {
 		};
 	};
 
+// Variable Defaults
+	var errMsg = $("errors");
+
 // Event Listeners
 	var displayLink = $("display");
 	displayLink.addEventListener("click", getData);
 	var clearLink = $("clear");
 	clearLink.addEventListener("click", confirmDelete);
 	var save = $("submit");
-	save.addEventListener("click", storeData);
+	save.addEventListener("click", validate);
 });
