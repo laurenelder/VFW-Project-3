@@ -91,7 +91,7 @@ window.addEventListener("DOMContentLoaded", function() {
 				$("clear").style.display = "inline";
 				$("display").style.display = "inline";
 				$("Add_a_User").style.display = "inline";
-				$("items").style.display = "none";
+				$("item").style.display = "none";
 				break;
 			default:
 				return false;
@@ -135,7 +135,7 @@ window.addEventListener("DOMContentLoaded", function() {
 		editLink.href = "#";
 		editLink.key = key;
 		var editText = "Edit User"
-		//editLink.addEventListener("click", editItem);
+		editLink.addEventListener("click", editItem);
 		editLink.innerHTML = editText;
 		linksLi.appendChild(editLink);
 
@@ -148,7 +148,7 @@ window.addEventListener("DOMContentLoaded", function() {
 		deleteLink.href = "#";
 		deleteLink.key = key;
 		var deleteText = "Delete User"
-		//deleteLink.addEventListener("click", editItem);
+		//deleteLink.addEventListener("click", deleteItem);
 		deleteLink.innerHTML = deleteText;
 		linksLi.appendChild(deleteLink);
 	};
@@ -182,6 +182,72 @@ window.addEventListener("DOMContentLoaded", function() {
 		
 		window.localStorage.setItem(id, JSON.stringify(item));
 		alert("User Saved!");
+	};
+
+// Edit Item Function
+	var editItem = function() {
+		var value = window.localStorage.getItem(this.key);
+		var item = JSON.parse(value);
+
+		// Show Form
+		toggleLinks("off");
+
+		$("uname").value = item.userName[1];
+		$("age").value = item.age[1];
+		$("city").value = item.city[1];
+		$("wsite").value = item.website[1];
+		$("fcontact").value = item.contacted[1];
+		var radioOne = document.forms[0].gender;
+		for (var i = 0; i < radioOne.length; i++) {
+			if (radioOne[i].value == "Male" && item.gender[1] == "Male") {
+				radioOne[i].setAttribute("checked", "checked");
+			} else if (radioOne[i].value == "Female" && item.gender[1] == "Female") {
+				radioOne[i].setAttribute("checked", "checked");
+			};
+		};
+		var radioTwo = document.forms[0].orientation;
+		for (var i = 0; i < radioTwo.length; i++) {
+			if (radioTwo[i].value == "Straight" && item.orientation[1] == "Straight") {
+				radioTwo[i].setAttribute("checked", "checked");
+			} else if (radioTwo[i].value == "Bisexual" && item.orientation[1] == "Bisexual") {
+				radioTwo[i].setAttribute("checked", "checked");
+			} else if (radioTwo[i].value == "Gay" && item.orientation[1] == "Gay") {
+				radioTwo[i].setAttribute("checked", "checked");
+			};
+		};
+		if (item.vehicle[1] == "Yes") {
+			$("vehicle").setAttribute("checked", "checked");
+		};
+		if (item.interests[1] == "Yes") {
+			$("shared interests").setAttribute("checked", "checked");
+		};
+		if (item.stable[1] == "Yes") {
+			$("financially stable").setAttribute("checked", "checked");
+		};
+		if (item.drinks[1] == "Yes") {
+			$("drinks").setAttribute("checked", "checked");
+		};
+		if (item.smokes[1] == "Yes") {
+			$("smokes").setAttribute("checked", "checked");
+		};
+		if (item.hasKids[1] == "Yes") {
+			$("has kids").setAttribute("checked", "checked");
+		};
+		if (item.wantsKids[1] == "Yes") {
+			$("wants kids").setAttribute("checked", "checked");
+		};
+		if (item.hasPets[1] == "Yes") {
+			$("has pets").setAttribute("checked", "checked");
+		};
+		$("music").value = item.music[1];
+		$("movie").value = item.movie[1];
+		$("compatibility").value = item.compatible[1];
+		$("comments").value = item.notes[1];
+		save.removeEventListener("click", validate);
+		$("submit").value = "Edit User";
+		var editSubmit $("submit");
+		editSubmit.addEventListener("click", validate);
+		editSubmit.key = this.key;
 	};
 
 // Clear Data Function
