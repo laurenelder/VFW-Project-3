@@ -38,12 +38,12 @@ window.addEventListener("DOMContentLoaded", function() {
 		} else {
 			vehicleValue = "No"
 		};
-		if ($("shared interests").checked) {
+		if ($("shared_interests").checked) {
 			interestsValue = "Yes";
 		} else {
 			interestsValue = "No";
 		};
-		if ($("financially stable").checked) {
+		if ($("financially_stable").checked) {
 			stableValue = "Yes";
 		} else {
 			stableValue = "No";
@@ -58,17 +58,17 @@ window.addEventListener("DOMContentLoaded", function() {
 		} else {
 			smokesValue = "No";
 		};
-		if ($("has kids").checked) {
+		if ($("has_kids").checked) {
 			hasKidsValue = "Yes";
 		} else {
 			hasKidsValue = "No";
 		};
-		if ($("wants kids").checked) {
+		if ($("wants_kids").checked) {
 			wantsKidsValue = "Yes";
 		} else {
 			wantsKidsValue = "No";
 		};
-		if ($("has pets").checked) {
+		if ($("has_pets").checked) {
 			hasPetsValue = "Yes";
 		} else {
 			hasPetsValue = "No";
@@ -224,10 +224,10 @@ window.addEventListener("DOMContentLoaded", function() {
 			$("vehicle").setAttribute("checked", "checked");
 		};
 		if (item.interests[1] == "Yes") {
-			$("shared interests").setAttribute("checked", "checked");
+			$("shared_interests").setAttribute("checked", "checked");
 		};
 		if (item.stable[1] == "Yes") {
-			$("financially stable").setAttribute("checked", "checked");
+			$("financially_stable").setAttribute("checked", "checked");
 		};
 		if (item.drinks[1] == "Yes") {
 			$("drinks").setAttribute("checked", "checked");
@@ -236,13 +236,13 @@ window.addEventListener("DOMContentLoaded", function() {
 			$("smokes").setAttribute("checked", "checked");
 		};
 		if (item.hasKids[1] == "Yes") {
-			$("has kids").setAttribute("checked", "checked");
+			$("has_kids").setAttribute("checked", "checked");
 		};
 		if (item.wantsKids[1] == "Yes") {
-			$("wants kids").setAttribute("checked", "checked");
+			$("wants_kids").setAttribute("checked", "checked");
 		};
 		if (item.hasPets[1] == "Yes") {
-			$("has pets").setAttribute("checked", "checked");
+			$("has_pets").setAttribute("checked", "checked");
 		};
 		$("music").value = item.music[1];
 		$("movie").value = item.movie[1];
