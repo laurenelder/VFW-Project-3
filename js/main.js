@@ -27,8 +27,6 @@ window.addEventListener("DOMContentLoaded", function() {
 		for (var i = 0; i < radioTwo.length; i++) {
 			if (radioTwo[i].checked) {
 				orientationValue = radioTwo[i].value;
-			} else {
-				orientationValue = "Unknown"
 			};
 		};
 	};
@@ -150,7 +148,7 @@ window.addEventListener("DOMContentLoaded", function() {
 		deleteLink.href = "#";
 		deleteLink.key = key;
 		var deleteText = "Delete User"
-		//deleteLink.addEventListener("click", deleteItem);
+		deleteLink.addEventListener("click", deleteItem);
 		deleteLink.innerHTML = deleteText;
 		linksLi.appendChild(deleteLink);
 	};
@@ -197,6 +195,7 @@ window.addEventListener("DOMContentLoaded", function() {
 
 		// Show Form
 		toggleLinks("off");
+		$("Add_a_User").style.display = "none";
 
 		$("uname").value = item.userName[1];
 		$("age").value = item.age[1];
@@ -205,9 +204,9 @@ window.addEventListener("DOMContentLoaded", function() {
 		$("fcontact").value = item.contacted[1];
 		var radioOne = document.forms[0].gender;
 		for (var i = 0; i < radioOne.length; i++) {
-			if (radioOne[i].value == "Male" && obj.gender[1] == "Male") {
+			if (radioOne[i].value == "Male" && item.gender[1] == "Male") {
 				radioOne[i].setAttribute("checked", "checked");
-			} else if (radioOne[i].value == "Female" && obj.gender[1] == "Female") {
+			} else if (radioOne[i].value == "Female" && item.gender[1] == "Female") {
 				radioOne[i].setAttribute("checked", "checked");
 			};
 		};
@@ -309,27 +308,32 @@ window.addEventListener("DOMContentLoaded", function() {
 			msgArry.push(wsiteError);
 		};
 
-		// Date Verification
-		var re = /^(\w{2})+(\/\w{2})+(\/\w{2})+$/;
-		if (!(re.exec(getFcontact.value))) {
-			var dateError = "Please enter a date in the following format (01/01/12).";
-			getFcontact.style.border = "1px solid red";
-			msgArry.push(dateError);
-		};
-
 		// Display Error Messages
 		if (msgArry.length >= 1) {
 			for (var i = 0, j = msgArry.length; i < j; i++) {
 				var errTxt = document.createElement("li");
 				errTxt.innerHTML = msgArry[i];
+				errTxt.style.color = "red";
 				errMsg.appendChild(errTxt);
 			};
-		
 		} else {
 			storeData(this.key);
+			window.location.reload($("Add_a_User"));
 		};
 		e.preventDefault();
 		return false;
+	};
+
+// Delete Item Function
+	var deleteItem = function() {
+		var ask = confirm("Are you sure you want to delete this user?");
+		if (ask) {
+			window.localStorage.removeItem(this.key);
+			alert("User has been deleted.");
+			window.location.reload();
+		} else {
+			alert("User was not deleted.");
+		};
 	};
 
 // Clear Data Function
