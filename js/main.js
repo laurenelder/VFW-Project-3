@@ -1,7 +1,7 @@
 // Devin "Lauren" Elder
 // VFW Term 1212
 // Project 3
-// 11/29/2012
+// 12/6/2012
 
 window.addEventListener("DOMContentLoaded", function() {
 
@@ -17,9 +17,7 @@ window.addEventListener("DOMContentLoaded", function() {
 		for (var i = 0; i < radioOne.length; i++) {
 			if (radioOne[i].checked) {
 				genderValue = radioOne[i].value;
-			} else {
-				genderValue = "Unknown"
-			};
+			}
 		};
 	};
 	var getRadioOrientation = function() {
@@ -27,7 +25,7 @@ window.addEventListener("DOMContentLoaded", function() {
 		for (var i = 0; i < radioTwo.length; i++) {
 			if (radioTwo[i].checked) {
 				orientationValue = radioTwo[i].value;
-			};
+			}
 		};
 	};
 
@@ -37,42 +35,42 @@ window.addEventListener("DOMContentLoaded", function() {
 			vehicleValue = "Yes";
 		} else {
 			vehicleValue = "No"
-		};
+		}
 		if ($("shared_interests").checked) {
 			interestsValue = "Yes";
 		} else {
 			interestsValue = "No";
-		};
+		}
 		if ($("financially_stable").checked) {
 			stableValue = "Yes";
 		} else {
 			stableValue = "No";
-		};
+		}
 		if ($("drinks").checked) {
 			drinksValue = "Yes";
 		} else {
 			drinksValue = "No";
-		};
+		}
 		if ($("smokes").checked) {
 			smokesValue = "Yes";
 		} else {
 			smokesValue = "No";
-		};
+		}
 		if ($("has_kids").checked) {
 			hasKidsValue = "Yes";
 		} else {
 			hasKidsValue = "No";
-		};
+		}
 		if ($("wants_kids").checked) {
 			wantsKidsValue = "Yes";
 		} else {
 			wantsKidsValue = "No";
-		};
+		}
 		if ($("has_pets").checked) {
 			hasPetsValue = "Yes";
 		} else {
 			hasPetsValue = "No";
-		};
+		}
 	};
 
 // Toggle links Function
@@ -195,7 +193,7 @@ window.addEventListener("DOMContentLoaded", function() {
 
 		// Show Form
 		toggleLinks("off");
-		$("Add_a_User").style.display = "none";
+		$("display").style.display = "none";
 
 		$("uname").value = item.userName[1];
 		$("age").value = item.age[1];
@@ -208,7 +206,7 @@ window.addEventListener("DOMContentLoaded", function() {
 				radioOne[i].setAttribute("checked", "checked");
 			} else if (radioOne[i].value == "Female" && item.gender[1] == "Female") {
 				radioOne[i].setAttribute("checked", "checked");
-			};
+			}
 		};
 		var radioTwo = document.forms[0].orientation;
 		for (var i = 0; i < radioTwo.length; i++) {
@@ -218,32 +216,32 @@ window.addEventListener("DOMContentLoaded", function() {
 				radioTwo[i].setAttribute("checked", "checked");
 			} else if (radioTwo[i].value == "Gay" && item.orientation[1] == "Gay") {
 				radioTwo[i].setAttribute("checked", "checked");
-			};
+			}
 		};
 		if (item.vehicle[1] == "Yes") {
 			$("vehicle").setAttribute("checked", "checked");
-		};
+		}
 		if (item.interests[1] == "Yes") {
 			$("shared_interests").setAttribute("checked", "checked");
-		};
+		}
 		if (item.stable[1] == "Yes") {
 			$("financially_stable").setAttribute("checked", "checked");
-		};
+		}
 		if (item.drinks[1] == "Yes") {
 			$("drinks").setAttribute("checked", "checked");
-		};
+		}
 		if (item.smokes[1] == "Yes") {
 			$("smokes").setAttribute("checked", "checked");
-		};
+		}
 		if (item.hasKids[1] == "Yes") {
 			$("has_kids").setAttribute("checked", "checked");
-		};
+		}
 		if (item.wantsKids[1] == "Yes") {
 			$("wants_kids").setAttribute("checked", "checked");
-		};
+		}
 		if (item.hasPets[1] == "Yes") {
 			$("has_pets").setAttribute("checked", "checked");
-		};
+		}
 		$("music").value = item.music[1];
 		$("movie").value = item.movie[1];
 		$("compatibility").value = item.compatible[1];
@@ -284,21 +282,21 @@ window.addEventListener("DOMContentLoaded", function() {
 			var unameError = "Please enter a username.";
 			getUname.style.border = "1px solid red";
 			msgArry.push(unameError);
-		};
+		}
 
 		// Age Verification
 		if ($("age").value === "") {
 			var ageError = "Please enter a age for the user.";
 			getAge.style.border = "1px solid red";
 			msgArry.push(ageError);
-		};
+		}
 		
 		// City Verification
 		if ($("city").value === "") {
 			var cityError = "Please enter a city for the user.";
 			getCity.style.border = "1px solid red";
 			msgArry.push(cityError);
-		};
+		}
 
 		// Website Verification
 		var re = /^\w+(\.\w{2,3})+$/;
@@ -306,7 +304,7 @@ window.addEventListener("DOMContentLoaded", function() {
 			var wsiteError = "Please enter a website the user is located on.";
 			getWsite.style.border = "1px solid red";
 			msgArry.push(wsiteError);
-		};
+		}
 
 		// Display Error Messages
 		if (msgArry.length >= 1) {
@@ -319,7 +317,7 @@ window.addEventListener("DOMContentLoaded", function() {
 		} else {
 			storeData(this.key);
 			window.location.reload($("Add_a_User"));
-		};
+		}
 		e.preventDefault();
 		return false;
 	};
@@ -333,7 +331,7 @@ window.addEventListener("DOMContentLoaded", function() {
 			window.location.reload();
 		} else {
 			alert("User was not deleted.");
-		};
+		}
 	};
 
 // Clear Data Function
@@ -354,8 +352,8 @@ window.addEventListener("DOMContentLoaded", function() {
 				clearLocal();
 			} else {
 				alert("Users not deleted.");
-			};
-		};
+			}
+		}
 	};
 
 // Variable Defaults
